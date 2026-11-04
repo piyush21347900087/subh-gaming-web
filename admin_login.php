@@ -21,8 +21,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         try {
             $db = db();
-            $stmt = $db->prepare("SELECT id, name, password, role FROM admin WHERE email = ?");
-            $stmt->bind_param('s', $email);
+            $stmt = $db->prepare("SELECT id, name, password, role FROM admin WHERE email = ? OR admin_id = ?");
+            $stmt->bind_param('ss', $email, $email);
             $stmt->execute();
             $stmt->bind_result($id, $name, $dbPass, $role);
             $found = $stmt->fetch();
