@@ -1,0 +1,11 @@
+services:
+  - type: web
+    name: subh-gaming-web
+    runtime: docker
+    plan: free
+    region: singapore
+    dockerContext: .
+    dockerfilePath: ./Dockerfile
+    envVars:
+      - key: PORT
+        value: 80
