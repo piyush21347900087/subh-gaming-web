@@ -1,0 +1,1 @@
+<?php require "includes/db.php"; $res = db()->query("SELECT min_amount, bonus_amount FROM bonus_rate WHERE is_active=1 ORDER BY min_amount ASC"); while($r = $res->fetch_assoc()) echo json_encode($r) . "\n"; ?>

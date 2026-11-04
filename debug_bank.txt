@@ -1,0 +1,2 @@
+Time: 2026-10-07 02:55:18 | Raw show_bank: 0 | Cast showBank: 0
+Time: 2026-10-07 02:55:18 | Raw show_bank: 0 | Cast showBank: 1

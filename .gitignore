@@ -1,0 +1,29 @@
+# ============================================================
+# MAHADEV KING - .gitignore
+# ============================================================
+
+# --- NEVER commit these secret files ---
+.env
+*.env
+secure/service-account.json
+secure/.fcm_access_token_cache.json
+
+# --- Logs ---
+*.log
+logs/
+api_fcm.log
+pay/IMB.log
+pay/yuvipay.log
+
+# --- Temp/cache ---
+tmp/
+*.tmp
+*.cache
+
+# --- Database backups (can contain sensitive data) ---
+database_backups/
+*.sql
+
+# --- Upload folders (user data) ---
+uploads/
+

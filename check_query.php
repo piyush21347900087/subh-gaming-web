@@ -1,0 +1,1 @@
+<?php require "includes/db.php"; $db = db(); $res = $db->query("SELECT market_name FROM markets ORDER BY sort_order, market_name"); if(!$res) { echo "ERROR: " . $db->error; } else { echo "OK. ROWS: " . $res->num_rows; } ?>

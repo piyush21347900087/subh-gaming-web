@@ -1,0 +1,10 @@
+{
+  "dependencies": {
+    "@babel/core": "^8.0.1",
+    "@babel/plugin-proposal-optional-chaining": "^7.21.0",
+    "@babel/plugin-transform-template-literals": "^8.0.1",
+    "@babel/preset-env": "^8.0.2",
+    "acorn": "^8.17.0",
+    "jsdom": "^29.1.1"
+  }
+}

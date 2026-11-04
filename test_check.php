@@ -1,0 +1,1 @@
+<?php require "includes/db.php"; $db=db(); $res=$db->query("SELECT message FROM chat_messages WHERE user_id='DPD1DYH' ORDER BY id DESC LIMIT 5"); while($row=$res->fetch_assoc()) echo $row["message"]."\n"; ?>

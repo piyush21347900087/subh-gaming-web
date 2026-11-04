@@ -1,0 +1,27 @@
+User-agent: *
+Allow: /
+
+Disallow: /admin_
+Disallow: /api_
+Disallow: /ajax_
+Disallow: /cron_
+Disallow: /check_
+Disallow: /debug_
+Disallow: /desc_
+Disallow: /fix
+Disallow: /scratch/
+Disallow: /tmp/
+Disallow: /logs/
+Disallow: /secure/
+Disallow: /includes/
+Disallow: /PHPMailer/
+Disallow: /uploads/
+Disallow: /pay/
+Disallow: /adminer.php
+Disallow: /secret_key.php
+Disallow: /webhook.php
+Disallow: /*.log$
+Disallow: /*.sql$
+Disallow: /*.txt$
+
+Sitemap: https://subhgaming.online/sitemap.xml

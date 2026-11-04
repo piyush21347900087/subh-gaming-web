@@ -1,0 +1,11 @@
+<?php
+$f = file_get_contents("live_chat.php");
+
+$pattern = '/j\.messages\.forEach\(function\(m\) \{\s*renderMessage\(m\);\s*var mid = parseInt\(m\.id\);\s*if \(mid > lastId\) lastId = mid;\s*if \(m\.sender === .admin. && mid > lastNotifiedAdminId\) \{\s*hasAdminMsg = true;\s*lastNotifiedAdminId = mid;\s*\}\s*\}\);/';
+
+$r2 = "j.messages.forEach(function(m) {\n                                renderMessage(m);\n                                var mid = parseInt(m.id);\n                                if (mid > lastId) lastId = mid;\n                                if (m.sender === 'admin' && mid > lastNotifiedAdminId) {\n                                    hasAdminMsg = true;\n                                    lastNotifiedAdminId = mid;\n                                }\n                            });\n                            \n                            var userAdminSeen = j.admin_seen || 0;\n                            var userAdminOnline = j.admin_online || false;\n                            \n                            document.querySelectorAll('.row.user').forEach(function(r) {\n                                var msgId = parseInt(r.getAttribute('data-msg-id') || 0);\n                                var tickImg = r.querySelector('.chat-tick');\n                                if (tickImg) {\n                                    if (msgId <= userAdminSeen) {\n                                        if (tickImg.src.indexOf('green_tick.svg') === -1) {\n                                            tickImg.src = 'icons/green_tick.svg';\n                                        }\n                                    } else if (userAdminOnline) {\n                                        if (tickImg.src.indexOf('double_tick.svg') === -1) {\n                                            tickImg.src = 'icons/double_tick.svg';\n                                        }\n                                    } else {\n                                        if (tickImg.src.indexOf('single_tick.svg') === -1) {\n                                            tickImg.src = 'icons/single_tick.svg';\n                                        }\n                                    }\n                                }\n                            });";
+
+$f = preg_replace($pattern, $r2, $f);
+file_put_contents("live_chat.php", $f);
+echo "DONE";
+?>

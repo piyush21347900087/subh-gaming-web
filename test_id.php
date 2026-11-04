@@ -1,0 +1,1 @@
+<?php require "includes/db.php"; $chk = db()->query("SELECT user_id FROM users WHERE user_id LIKE 'MK%' ORDER BY LENGTH(user_id) DESC, user_id DESC LIMIT 1"); if ($chk && $row = $chk->fetch_assoc()) echo $row["user_id"]; ?>

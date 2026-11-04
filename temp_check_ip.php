@@ -1,0 +1,1 @@
+<?php require 'includes/db.php'; $db = db(); $res = $db->query('SHOW TABLES'); while ($r = $res->fetch_row()) { $table = $r[0]; $res2 = $db->query("SHOW COLUMNS FROM $table"); while ($c = $res2->fetch_assoc()) { if (strpos($c['Field'], 'ip') !== false) { echo $table . ' -> ' . $c['Field'] . "\n"; } } } ?>

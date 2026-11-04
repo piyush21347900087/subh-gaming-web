@@ -1,0 +1,33 @@
+# Royal King - Clean .htaccess
+# PHP handling is controlled by the hosting panel/server. Hard-coded handlers can
+# cause HTTP 500 on some Apache/LiteSpeed setups.
+
+RewriteEngine On
+RewriteBase /
+
+# Force HTTPS
+RewriteCond %{HTTPS} off
+RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+RewriteCond %{REQUEST_FILENAME} -f [OR]
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteRule ^ - [L]
+
+DirectoryIndex index.php index.html
+
+<FilesMatch "\.php$">
+    Require all granted
+</FilesMatch>
+
+# Block sensitive files
+<FilesMatch "(\.env|composer\.(json|lock)|package\.json|webpack\..*|firebase.*\.json|service.*\.json|fcm\.php|secret_key\.php)$">
+    Require all denied
+</FilesMatch>
+
+<IfModule mod_headers.c>
+Header set X-Content-Type-Options "nosniff"
+Header set X-Frame-Options "SAMEORIGIN"
+Header set Referrer-Policy "strict-origin-when-cross-origin"
+</IfModule>
+
+Options -Indexes

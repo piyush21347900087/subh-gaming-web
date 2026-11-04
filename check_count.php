@@ -1,0 +1,1 @@
+<?php require "includes/db.php"; $res = db()->query("SELECT DATE(created_at) as dt, COUNT(*) as c FROM users GROUP BY dt ORDER BY dt DESC LIMIT 5"); while($r = $res->fetch_assoc()) echo $r["dt"] . " => " . $r["c"] . "\n"; ?>

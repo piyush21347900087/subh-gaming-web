@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 350 55" preserveAspectRatio="none" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <defs>
+    <filter id="shadow" x="-5%" y="-10%" width="110%" height="130%">
+      <feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="rgba(0,0,0,0.4)"/>
+    </filter>
+  </defs>
+
+  <!-- Outer fill: concave corners (notch bites inward at each corner) -->
+  <!-- Outer r=14, W=350, H=55 -->
+  <path d="
+    M 14 0
+    L 336 0
+    A 14 14 0 0 0 350 14
+    L 350 41
+    A 14 14 0 0 0 336 55
+    L 14 55
+    A 14 14 0 0 0 0 41
+    L 0 14
+    A 14 14 0 0 0 14 0
+    Z
+  " fill="#8b0000" filter="url(#shadow)"/>
+
+  <!-- Inner stroke: same concave shape, inset 4px, r=10 -->
+  <path d="
+    M 14 4
+    L 336 4
+    A 10 10 0 0 0 346 14
+    L 346 41
+    A 10 10 0 0 0 336 51
+    L 14 51
+    A 10 10 0 0 0 4 41
+    L 4 14
+    A 10 10 0 0 0 14 4
+    Z
+  " fill="none" stroke="rgba(220,160,160,0.65)" stroke-width="1.5"/>
+</svg>

@@ -1,0 +1,1 @@
+<?php require "includes/db.php"; $db = db(); $res = $db->query("SELECT market_name, is_published, status FROM markets"); while($row = $res->fetch_assoc()) { if($row["is_published"] == 0) { echo "UNPUBLISHED: " . $row["market_name"] . "\n"; } } ?>

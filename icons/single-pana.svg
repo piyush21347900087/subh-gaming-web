@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 59.56 78.82">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #fff;
+      }
+
+      .cls-2 {
+        fill: #fed41d;
+      }
+
+      .cls-2, .cls-3 {
+        fill-rule: evenodd;
+      }
+
+      .cls-3 {
+        fill: #58575d;
+      }
+    </style>
+  </defs>
+  <path class="cls-2" d="M5.23,0h49.11c2.87,0,5.23,2.35,5.23,5.23v68.36c0,2.87-2.35,5.23-5.23,5.23H5.23c-2.87,0-5.23-2.35-5.23-5.23V5.23C0,2.35,2.35,0,5.23,0"/>
+  <rect class="cls-1" x="10.19" y="9.73" width="5.49" height="5.49"/>
+  <rect class="cls-1" x="45.15" y="64.07" width="5.49" height="5.49"/>
+  <path class="cls-3" d="M46.01,31.61c-5.45-5.7-11.14-11.23-16.23-17.19-5.09,5.97-10.77,11.49-16.23,17.19-8.75,9.14-4.37,20.82,6.94,21.34h6.48v5.78h-4.14v5.66h14.62v-5.66h-4.14v-5.78h5.74c11.31-.53,15.69-12.21,6.94-21.34Z"/>
+  <rect class="cls-1" x="45.15" y="9.73" width="5.49" height="5.49"/>
+  <rect class="cls-1" x="10.19" y="64.07" width="5.49" height="5.49"/>
+</svg>
