@@ -187,50 +187,45 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   <script>
     function togglePwd(id, btn) {
       const input = document.getElementById(id);
-      const icon = btn.querySelector('i');
+      const icon = btn ? btn.querySelector('i') : null;
+      if (!input) return;
       const show = input.type === 'password';
       input.type = show ? 'text' : 'password';
-      icon.className = show ? 'fas fa-eye-slash' : 'fas fa-eye';
+      if (icon) {
+        icon.className = show ? 'fas fa-eye-slash' : 'fas fa-eye';
+      }
+    }
+
+    const adminEmail = document.getElementById('adminEmail');
+    const adminPass  = document.getElementById('loginPass');
+    const saveCheck  = document.getElementById('saveAdminPass');
+
+    window.addEventListener('DOMContentLoaded', function() {
+      const ad = localStorage.getItem('admin_save');
+      if (ad && adminEmail && adminPass) {
+        try {
+          const obj = JSON.parse(atob(ad));
+          if (obj.email) adminEmail.value = obj.email;
+          if (obj.pass)  adminPass.value  = obj.pass;
+          if (saveCheck) saveCheck.checked = true;
+        } catch(e){}
+      }
+    });
+
+    const form = document.getElementById('adminLoginForm');
+    if (form) {
+      form.addEventListener('submit', function() {
+        if (saveCheck && saveCheck.checked && adminEmail && adminPass) {
+          const obj = {
+            email: adminEmail.value,
+            pass:  adminPass.value
+          };
+          localStorage.setItem('admin_save', btoa(JSON.stringify(obj)));
+        } else {
+          localStorage.removeItem('admin_save');
+        }
+      });
     }
   </script>
 </body>
 </html>
-    inp.type = show ? 'text' : 'password';
-    ic.classList.toggle('fa-eye-slash', show);
-  }
-
-  const adminEmail = document.getElementById('adminEmail');
-  const adminPass  = document.getElementById('loginPass');
-  const saveCheck  = document.getElementById('saveAdminPass');
-
-  window.addEventListener('DOMContentLoaded', function() {
-    const ad = localStorage.getItem('admin_save');
-    if (ad) {
-      try {
-        const obj = JSON.parse(atob(ad));
-        if (obj.email) adminEmail.value = obj.email;
-        if (obj.pass)  adminPass.value  = obj.pass;
-        saveCheck.checked = true;
-      } catch(e){}
-    }
-  });
-
-  document.getElementById('adminLoginForm').addEventListener('submit', function() {
-    if (saveCheck.checked) {
-      const obj = {
-        email: adminEmail.value,
-        pass:  adminPass.value
-      };
-      localStorage.setItem('admin_save', btoa(JSON.stringify(obj)));
-    } else {
-      localStorage.removeItem('admin_save');
-    }
-  });
-</script>
-
-</body>
-</html>
-
-
-
-
