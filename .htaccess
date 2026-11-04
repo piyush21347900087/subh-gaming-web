@@ -5,8 +5,9 @@
 RewriteEngine On
 RewriteBase /
 
-# Force HTTPS
+# Force HTTPS (Proxy-aware for Render, Cloudflare, etc.)
 RewriteCond %{HTTPS} off
+RewriteCond %{HTTP:X-Forwarded-Proto} !https
 RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
 
 RewriteCond %{REQUEST_FILENAME} -f [OR]

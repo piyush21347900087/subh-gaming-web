@@ -11,7 +11,7 @@ RUN apt-get update && apt-get install -y \
     unzip \
     && docker-php-ext-configure gd --with-freetype --with-jpeg \
     && docker-php-ext-install -j$(nproc) gd mysqli curl pdo pdo_mysql \
-    && a2enmod rewrite \
+    && a2enmod rewrite headers remoteip \
     && rm -rf /var/lib/apt/lists/*
 
 # Allow .htaccess overrides in Apache
