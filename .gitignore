@@ -1,5 +1,5 @@
 # ============================================================
-# MAHADEV KING - .gitignore
+# SUBH GAMING - .gitignore
 # ============================================================
 
 # --- NEVER commit these secret files ---
@@ -23,7 +23,7 @@ tmp/
 # --- Database backups (can contain sensitive data) ---
 database_backups/
 *.sql
+!subh_gaming_clean.sql
 
 # --- Upload folders (user data) ---
 uploads/
-

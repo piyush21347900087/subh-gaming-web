@@ -40,6 +40,7 @@ function db(): mysqli
         // Primary: from .env file
 
         [DB_USER, DB_PASS, DB_NAME],
+        ['subh_user', 'subh123', 'subh_gaming'],
 
         // Local dev fallbacks (no password)
 

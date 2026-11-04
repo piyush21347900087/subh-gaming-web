@@ -1,8 +1,10 @@
 # Use official PHP Apache image
 FROM php:8.2-apache
 
-# Install required system dependencies & PHP extensions
-RUN apt-get update && apt-get install -y \
+# Install required system dependencies, MariaDB server & PHP extensions
+RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y \
+    mariadb-server \
+    mariadb-client \
     libpng-dev \
     libjpeg-dev \
     libfreetype6-dev \
@@ -14,6 +16,9 @@ RUN apt-get update && apt-get install -y \
     && a2enmod rewrite headers remoteip \
     && rm -rf /var/lib/apt/lists/*
 
+# Optimize MariaDB memory for container (low memory footprint)
+RUN echo "[mysqld]\ninnodb_buffer_pool_size = 32M\nperformance_schema = off\nskip-innodb-doublewrite\n" > /etc/mysql/mariadb.conf.d/99-render.cnf
+
 # Allow .htaccess overrides in Apache
 RUN sed -i '/<Directory \/var\/www\/>/,/<\/Directory>/ s/AllowOverride None/AllowOverride All/' /etc/apache2/apache2.conf
 
@@ -21,13 +26,13 @@ RUN sed -i '/<Directory \/var\/www\/>/,/<\/Directory>/ s/AllowOverride None/Allo
 WORKDIR /var/www/html
 COPY . /var/www/html/
 
-# Fix permissions
-RUN chown -R www-data:www-data /var/www/html \
+# Fix permissions and startup script
+RUN chmod +x /var/www/html/start.sh \
+    && chown -R www-data:www-data /var/www/html \
     && chmod -R 755 /var/www/html
 
-# Render sets PORT dynamically, configure Apache port
+# Render sets PORT dynamically
 ENV PORT=80
 EXPOSE 80
 
-# Configure Apache to listen on $PORT if specified at runtime
-CMD sh -c "sed -i \"s/80/\${PORT:-80}/g\" /etc/apache2/ports.conf /etc/apache2/sites-available/*.conf && apache2-foreground"
+CMD ["/bin/bash", "/var/www/html/start.sh"]

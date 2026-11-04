@@ -54,9 +54,9 @@ if (!function_exists('_mk_load_env')) {
 
         // ============ Database ============
         if (!defined('DB_HOST')) define('DB_HOST', $env('DB_HOST', 'localhost'));
-        if (!defined('DB_USER')) define('DB_USER', $env('DB_USER', ''));
-        if (!defined('DB_PASS')) define('DB_PASS', $env('DB_PASS', ''));
-        if (!defined('DB_NAME')) define('DB_NAME', $env('DB_NAME', ''));
+        if (!defined('DB_USER')) define('DB_USER', $env('DB_USER', 'subh_user'));
+        if (!defined('DB_PASS')) define('DB_PASS', $env('DB_PASS', 'subh123'));
+        if (!defined('DB_NAME')) define('DB_NAME', $env('DB_NAME', 'subh_gaming'));
 
         // ============ AquaSMS ============
         if (!defined('AQUASMS_USERNAME'))   define('AQUASMS_USERNAME',   $env('AQUASMS_USERNAME',   ''));
