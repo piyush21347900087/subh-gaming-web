@@ -1,5 +1,7 @@
 <?php
 if (session_status() !== PHP_SESSION_ACTIVE) { session_start(); }
+error_reporting(0);
+ini_set('display_errors', '0');
 header('Cache-Control: no-store, no-cache, must-revalidate, max-age=0');
 header('Pragma: no-cache');
 header('Expires: 0');
@@ -128,7 +130,8 @@ try {
 
 $cleanWa   = preg_replace('/[^0-9]/', '', $whatsappNo);
 $cleanCall = preg_replace('/[^0-9+]/', '', $callingNo);
-$cleanTg   = ltrim($telegramUser, '@');
+$telegramUser = defined('TELEGRAM_USERNAME') && TELEGRAM_USERNAME !== '' ? TELEGRAM_USERNAME : 'savariyaseth_official';
+$cleanTg   = ltrim((string)$telegramUser, '@');
 ?>
 <!DOCTYPE html>
 <html lang="hi">
