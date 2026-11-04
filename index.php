@@ -57,19 +57,42 @@ if (isset($_GET['apk']) && $_GET['apk'] === '1') {
 $markets = [];
 $whatsappNo = defined('WHATSAPP_NUMBER') && WHATSAPP_NUMBER !== '' ? WHATSAPP_NUMBER : '919876543210';
 $callingNo  = defined('SUPPORT_PHONE') && SUPPORT_PHONE !== '' ? SUPPORT_PHONE : '919876543210';
-$telegramUser = defined('TELEGRAM_USERNAME') && TELEGRAM_USERNAME !== '' ? TELEGRAM_USERNAME : 'savariyaseth_official';
+$telegramLink = 'https://t.me/' . ltrim(defined('TELEGRAM_USERNAME') && TELEGRAM_USERNAME !== '' ? TELEGRAM_USERNAME : 'savariyaseth_official', '@');
 
 try {
     require_once __DIR__ . '/includes/db.php';
     $db = db();
 
-    // Fetch contacts from admin_payment_details if available
-    $resWa = $db->query("SELECT whatsapp_no_1, whatsapp_no_2 FROM admin_payment_details WHERE id = 1 LIMIT 1");
+    // Fetch all contacts from Admin Panel settings (admin_payment_details)
+    $resWa = $db->query("SELECT whatsapp_no_1, whatsapp_no_2, whatsapp_deposit_no, telegram_id, telegram_channel FROM admin_payment_details WHERE id = 1 LIMIT 1");
     if ($resWa && $rowWa = $resWa->fetch_assoc()) {
-        $dbWa = trim($rowWa['whatsapp_no_1'] ?: ($rowWa['whatsapp_no_2'] ?: ''));
-        if ($dbWa !== '') {
-            $whatsappNo = $dbWa;
-            $callingNo  = $dbWa;
+        $w1   = trim((string)($rowWa['whatsapp_no_1'] ?? ''));
+        $w2   = trim((string)($rowWa['whatsapp_no_2'] ?? ''));
+        $wDep = trim((string)($rowWa['whatsapp_deposit_no'] ?? ''));
+        $tgCh = trim((string)($rowWa['telegram_channel'] ?? ''));
+        $tgId = trim((string)($rowWa['telegram_id'] ?? ''));
+
+        // 1. WhatsApp Button (WhatsApp No 1, fallback to 2)
+        if ($w1 !== '') {
+            $whatsappNo = $w1;
+        } elseif ($w2 !== '') {
+            $whatsappNo = $w2;
+        }
+
+        // 2. Call Now Button (WhatsApp No 2 / Deposit No / WhatsApp No 1)
+        if ($w2 !== '') {
+            $callingNo = $w2;
+        } elseif ($wDep !== '') {
+            $callingNo = $wDep;
+        } elseif ($w1 !== '') {
+            $callingNo = $w1;
+        }
+
+        // 3. Telegram Button (Channel link or username)
+        if ($tgCh !== '') {
+            $telegramLink = (strpos($tgCh, 'http') === 0) ? $tgCh : ('https://t.me/' . ltrim($tgCh, '@'));
+        } elseif ($tgId !== '') {
+            $telegramLink = (strpos($tgId, 'http') === 0) ? $tgId : ('https://t.me/' . ltrim($tgId, '@'));
         }
     }
 
@@ -819,7 +842,7 @@ $cleanTg   = ltrim($telegramUser, '@');
             </a>
 
             <!-- Telegram -->
-            <a href="https://t.me/<?= htmlspecialchars($cleanTg) ?>" target="_blank" class="contact-btn btn-telegram">
+            <a href="<?= htmlspecialchars($telegramLink) ?>" target="_blank" class="contact-btn btn-telegram">
                 <i class="fa-brands fa-telegram"></i>
                 <span>Telegram</span>
             </a>
@@ -981,7 +1004,7 @@ $cleanTg   = ltrim($telegramUser, '@');
             <i class="fa-brands fa-whatsapp"></i>
             <span>WhatsApp</span>
         </a>
-        <a href="https://t.me/<?= htmlspecialchars($cleanTg) ?>" target="_blank" class="float-btn tg">
+        <a href="<?= htmlspecialchars($telegramLink) ?>" target="_blank" class="float-btn tg">
             <i class="fa-brands fa-telegram"></i>
             <span>Telegram</span>
         </a>
