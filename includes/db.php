@@ -165,7 +165,10 @@ function db(): mysqli
 
         echo '<div class="box"><h2>Subh Gaming Database Notice</h2>';
 
-        echo '<p>Unable to connect to MySQL database.</p><?php if (!empty($GLOBALS['db_last_err'])) { echo "<p style='color:#f87171;font-size:12px;background:#1e1b4b;padding:8px;border-radius:6px;word-break:break-all;'>Details: " . htmlspecialchars($GLOBALS['db_last_err']) . "</p>"; } ?>';
+        echo '<p>Unable to connect to MySQL database.</p>';
+        if (!empty($GLOBALS['db_last_err'])) {
+            echo '<p style="color:#f87171;font-size:12px;background:#1e1b4b;padding:8px;border-radius:6px;word-break:break-all;">Details: ' . htmlspecialchars((string)$GLOBALS['db_last_err']) . '</p>';
+        }
 
         echo '<p>Please import <code>subh_gaming_clean.sql</code> into your phpMyAdmin or check credentials in <code>includes/db.php</code>.</p>';
 
