@@ -17,7 +17,7 @@ RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y \
     && rm -rf /var/lib/apt/lists/*
 
 # Optimize MariaDB memory for container (low memory footprint)
-RUN echo "[mysqld]\ninnodb_buffer_pool_size = 32M\nperformance_schema = off\nskip-innodb-doublewrite\n" > /etc/mysql/mariadb.conf.d/99-render.cnf
+RUN printf "[mysqld]\ninnodb_buffer_pool_size = 32M\nperformance_schema = off\nskip-innodb-doublewrite\n" > /etc/mysql/mariadb.conf.d/99-render.cnf
 
 # Allow .htaccess overrides in Apache
 RUN sed -i '/<Directory \/var\/www\/>/,/<\/Directory>/ s/AllowOverride None/AllowOverride All/' /etc/apache2/apache2.conf

@@ -19,8 +19,12 @@ if [ -z "$DB_HOST" ] || [ "$DB_HOST" = "localhost" ] || [ "$DB_HOST" = "127.0.0.
         mysql_install_db --user=mysql --datadir=/var/lib/mysql > /dev/null 2>&1 || true
     fi
 
-    # Start mysqld directly in background
-    mysqld --user=mysql --skip-name-resolve &
+    # Start MariaDB service
+    if command -v service >/dev/null 2>&1; then
+        service mariadb start || service mysql start || mysqld --user=mysql --skip-name-resolve &
+    else
+        mysqld --user=mysql --skip-name-resolve &
+    fi
 
     # Wait up to 30 seconds for MariaDB
     echo "Waiting for MariaDB to start..."
