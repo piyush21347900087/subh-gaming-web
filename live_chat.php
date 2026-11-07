@@ -1,10 +1,11 @@
 <?php
+if (!ob_get_level()) { ob_start(); }
 require_once 'includes/lang.php';
 if (session_status() !== PHP_SESSION_ACTIVE) { session_start(); }
 require_once 'includes/db.php';
 
-ini_set('display_errors', 1);
-error_reporting(E_ALL);
+ini_set('display_errors', 0);
+error_reporting(E_ALL & ~E_NOTICE & ~E_WARNING & ~E_DEPRECATED);
 mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
 
 date_default_timezone_set('Asia/Kolkata');

@@ -1,29 +1,20 @@
 <?php
+require_once __DIR__ . '/config.php';
 
-if (!defined('FCM_PROJECT_ID')) {
-
+if (!defined('FCM_PROJECT_ID') || FCM_PROJECT_ID === '') {
     $saFile = __DIR__ . '/../secure/service-account.json';
-
-    // Load from .env via config.php
-
-    require_once __DIR__ . '/config.php';
-
-    $pidVal = defined('FCM_PROJECT_ID') && FCM_PROJECT_ID !== '' ? FCM_PROJECT_ID : 'subh-gaming';
+    $pidVal = 'subh-gaming';
 
     if (file_exists($saFile)) {
-
         $saArr = @json_decode(file_get_contents($saFile), true);
-
         if (!empty($saArr['project_id'])) {
-
             $pidVal = $saArr['project_id'];
-
         }
-
     }
 
-    define('FCM_PROJECT_ID', $pidVal);
-
+    if (!defined('FCM_PROJECT_ID')) {
+        define('FCM_PROJECT_ID', $pidVal);
+    }
 }
 
 

@@ -1,11 +1,12 @@
 <?php
+if (!ob_get_level()) { ob_start(); }
 session_start();
 require_once 'includes/db.php';
 require_once 'includes/fcm_helper.php';
 date_default_timezone_set('Asia/Kolkata');
 
-ini_set('display_errors', 1);
-error_reporting(E_ALL);
+ini_set('display_errors', 0);
+error_reporting(E_ALL & ~E_NOTICE & ~E_WARNING & ~E_DEPRECATED);
 
 if (!isset($_SESSION['admin'])) {
   header('Location: admin_login.php');
