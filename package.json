@@ -5,6 +5,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
+    "start:render": "npm run db:init && next start",
     "lint": "eslint .",
     "typecheck": "tsc --noEmit",
     "db:init": "tsx src/db/init.ts",
